@@ -183,14 +183,12 @@ def SubClassy(klass):
         }
         passes = {"field": rotflol()}
         fails  = {"field": 42}
-
-
     """
 
-    def classiness_lambda(value):
+    def subclassiness_lambda(value):
         return isinstance(value, klass)
-    classiness_lambda.err_message = "must be instanceof {0}".format(klass.__name__)
-    return classiness_lambda
+    subclassiness_lambda.err_message = "must be subclass of {0}".format(klass.__name__)
+    return subclassiness_lambda
 
 def Required(field, dictionary):
     """
