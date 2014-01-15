@@ -142,6 +142,29 @@ def Truthy():
     truth_lambda.err_message = "must be True-equivalent value"
     return truth_lambda
 
+def Classy(klass):
+    """
+    Use to specify that the
+    value of the key being
+    validated must be an instance of a class,
+    i.e. would cause an isinstance test
+    to evaluate to True.
+
+    # Example:
+        validations = {
+            "field": [Classy(bool)]
+        }
+        passes = {"field": True}
+        fails  = {"field": 42}
+
+
+    """
+
+    def classiness_lambda(value):
+        return isinstance(value, klass)
+    classiness_lambda.err_message = "must be instanceof {0}".format(klass.__name__)
+    return classiness_lambda
+
 def Required(field, dictionary):
     """
     When added to a list of validations
