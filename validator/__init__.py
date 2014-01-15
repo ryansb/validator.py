@@ -165,6 +165,33 @@ def Classy(klass):
     classiness_lambda.err_message = "must be instanceof {0}".format(klass.__name__)
     return classiness_lambda
 
+def SubClassy(klass):
+    """
+    Use to specify that the
+    value of the key being
+    validated must be a subclass of a class,
+    i.e. would cause an issubclass test
+    to evaluate to True.
+
+    # Example:
+        class lol(object):
+            pass
+        class rotflol(lol):
+            pass
+        validations = {
+            "field": [SubClassy(lol)]
+        }
+        passes = {"field": rotflol()}
+        fails  = {"field": 42}
+
+
+    """
+
+    def classiness_lambda(value):
+        return isinstance(value, klass)
+    classiness_lambda.err_message = "must be instanceof {0}".format(klass.__name__)
+    return classiness_lambda
+
 def Required(field, dictionary):
     """
     When added to a list of validations
